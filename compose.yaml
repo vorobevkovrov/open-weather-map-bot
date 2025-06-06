@@ -1,1 +1,7 @@
+version: "2.34.0"
 services:
+  app:
+    image: java:app
+    container_name: app
+    ports:
+      - "127.0.0.1:8080:8080"

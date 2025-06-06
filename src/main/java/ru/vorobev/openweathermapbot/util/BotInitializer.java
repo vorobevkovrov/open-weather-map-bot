@@ -1,5 +1,6 @@
-package ru.vorobev.openweathermapbot.configuration.util;
+package ru.vorobev.openweathermapbot.util;
 
+import lombok.SneakyThrows;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -15,14 +16,10 @@ public class BotInitializer {
         this.telegramBot = telegramBot;
     }
 
+    @SneakyThrows
     @EventListener({ContextRefreshedEvent.class})
-    public void init() throws TelegramApiException {
+    public void init() throws TelegramApiException  {
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
-        System.out.println(telegramBot.getBotUsername());
-        try {
             telegramBotsApi.registerBot(telegramBot);
-        } catch (TelegramApiException e) {
-            throw new TelegramApiException(e);
-        }
     }
 }

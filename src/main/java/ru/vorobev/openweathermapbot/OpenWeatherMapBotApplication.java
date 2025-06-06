@@ -9,5 +9,4 @@ public class OpenWeatherMapBotApplication {
     public static void main(String[] args) {
         SpringApplication.run(OpenWeatherMapBotApplication.class, args);
     }
-
 }

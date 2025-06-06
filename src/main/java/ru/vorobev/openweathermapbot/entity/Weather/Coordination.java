@@ -1,4 +1,4 @@
-package ru.vorobev.openweathermapbot.Model.Weather;
+package ru.vorobev.openweathermapbot.entity.Weather;
 
 import lombok.Data;
 

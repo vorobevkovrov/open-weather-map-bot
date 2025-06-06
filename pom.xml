@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>ru.vorobev</groupId>
-    <artifactId>open-weather-map-bot</artifactId>
+    <artifactId>open-receiveWeather-map-bot</artifactId>
     <version>0.0.1</version>
     <name>open-weather-map-bot</name>
     <description>open-weather-map-bot</description>
@@ -50,6 +50,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.38</version>
             <optional>true</optional>
         </dependency>
         <dependency>
