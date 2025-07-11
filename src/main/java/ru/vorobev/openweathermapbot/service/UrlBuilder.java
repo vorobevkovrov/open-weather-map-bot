@@ -1,4 +1,5 @@
 package ru.vorobev.openweathermapbot.service;
 
-public class UrlBuilder {
+public interface UrlBuilder {
+    String buildWeatherUrl(double lat, double lon);
 }

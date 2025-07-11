@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>ru.vorobev</groupId>
-    <artifactId>open-receiveWeather-map-bot</artifactId>
+    <artifactId>open-currentWeatherDataImpl-map-bot</artifactId>
     <version>0.0.1</version>
     <name>open-weather-map-bot</name>
     <description>open-weather-map-bot</description>

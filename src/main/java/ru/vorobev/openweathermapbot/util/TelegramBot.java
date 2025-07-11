@@ -9,7 +9,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.vorobev.openweathermapbot.configuration.BotConfig;
 import ru.vorobev.openweathermapbot.configuration.OpenWeatherMapConfig;
-import ru.vorobev.openweathermapbot.service.ReceiveWeather;
+import ru.vorobev.openweathermapbot.service.impl.CurrentWeatherDataImpl;
 
 @Component
 public class TelegramBot extends TelegramLongPollingBot {
@@ -18,12 +18,12 @@ public class TelegramBot extends TelegramLongPollingBot {
     private final static Logger LOG = LoggerFactory.getLogger(TelegramBot.class);
     private final OpenWeatherMapConfig openWeatherMapConfig;
     private final BotConfig botConfig;
-    private final ReceiveWeather receiveWeather;
+    private final CurrentWeatherDataImpl currentWeatherDataImpl;
 
-    public TelegramBot(OpenWeatherMapConfig openWeatherMapConfig, BotConfig botConfig, ReceiveWeather receiveWeather) {
+    public TelegramBot(OpenWeatherMapConfig openWeatherMapConfig, BotConfig botConfig, CurrentWeatherDataImpl currentWeatherDataImpl) {
         this.openWeatherMapConfig = openWeatherMapConfig;
         this.botConfig = botConfig;
-        this.receiveWeather = receiveWeather;
+        this.currentWeatherDataImpl = currentWeatherDataImpl;
     }
 
     @Override
@@ -53,8 +53,8 @@ public class TelegramBot extends TelegramLongPollingBot {
 
 
     private void showWeatherNow(long chatId) {
-        String defaultWeather = receiveWeather
-                .getWeatherInDefaultCity(59, 30);
+        String defaultWeather = currentWeatherDataImpl
+                .getWeatherInDefaultCity(59.916668, 30.25);
         sendMessage(chatId, defaultWeather);
         LOG.info("private void showWeatherNow(long chatId)");
     }

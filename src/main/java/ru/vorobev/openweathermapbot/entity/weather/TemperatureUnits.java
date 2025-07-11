@@ -1,4 +1,4 @@
-package ru.vorobev.openweathermapbot.entity.Weather;
+package ru.vorobev.openweathermapbot.entity.weather;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
