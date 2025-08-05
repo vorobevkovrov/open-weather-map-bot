@@ -1,6 +1,5 @@
 package ru.vorobev.openweathermapbot.service.impl;
 
-import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -11,7 +10,7 @@ import ru.vorobev.openweathermapbot.service.UrlBuilder;
 
 @Service
 public class UrlBuilderImpl implements UrlBuilder {
-    private OpenWeatherMapConfig weatherMapConfig;
+    private final OpenWeatherMapConfig weatherMapConfig;
     private final static Logger LOG = LoggerFactory.getLogger(CurrentWeatherDataImpl.class);
     private TemperatureUnits temperatureUnits;
 

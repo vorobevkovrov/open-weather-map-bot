@@ -15,20 +15,4 @@ public class BotConfig {
     private String botName;
     @Value("${bot.token}")
     private String botToken;
-
-    public void setBotName(String botName) {
-        this.botName = botName;
-    }
-
-    public void setBotToken(String botToken) {
-        this.botToken = botToken;
-    }
-
-    public String getBotName() {
-        return botName;
-    }
-
-    public String getBotToken() {
-        return botToken;
-    }
 }
