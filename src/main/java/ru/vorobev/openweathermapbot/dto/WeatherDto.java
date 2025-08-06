@@ -19,5 +19,4 @@ public class WeatherDto {
     private double gust;
     private long sunrise;
     private long sunset;
-
 }

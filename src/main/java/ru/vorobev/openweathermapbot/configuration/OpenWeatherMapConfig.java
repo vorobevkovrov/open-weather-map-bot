@@ -13,10 +13,4 @@ public class OpenWeatherMapConfig {
     private String APIkey;
     @Value("${open.weather.api.url}")
     private  String APIUrl;
-    //    public String getAPIkey() {
-//        return APIkey;
-//    }
-//    public String getAPIUrl() {
-//        return APIUrl;
-//    }
 }

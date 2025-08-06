@@ -97,18 +97,11 @@ public class WeatherData {
     }
 
     // Вложенный класс для облаков
+    @Getter
+    @Setter
     public static class Clouds {
         @JsonProperty
         private int all;
-
-        // Getters and Setters
-        public int getAll() {
-            return all;
-        }
-
-        public void setAll(int all) {
-            this.all = all;
-        }
     }
 
     // Вложенный класс для системной информации
