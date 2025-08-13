@@ -1,5 +1,6 @@
 package ru.vorobev.openweathermapbot.util;
 
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -10,7 +11,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.vorobev.openweathermapbot.configuration.BotConfig;
 import ru.vorobev.openweathermapbot.configuration.OpenWeatherMapConfig;
 import ru.vorobev.openweathermapbot.service.impl.CurrentWeatherDataImpl;
-
+@AllArgsConstructor
 @Component
 public class TelegramBot extends TelegramLongPollingBot {
     private final static String WEATHER_NOW = "/showWeatherNow";
@@ -20,11 +21,11 @@ public class TelegramBot extends TelegramLongPollingBot {
     private final BotConfig botConfig;
     private final CurrentWeatherDataImpl currentWeatherDataImpl;
 
-    public TelegramBot(OpenWeatherMapConfig openWeatherMapConfig, BotConfig botConfig, CurrentWeatherDataImpl currentWeatherDataImpl) {
-        this.openWeatherMapConfig = openWeatherMapConfig;
-        this.botConfig = botConfig;
-        this.currentWeatherDataImpl = currentWeatherDataImpl;
-    }
+//    public TelegramBot(OpenWeatherMapConfig openWeatherMapConfig, BotConfig botConfig, CurrentWeatherDataImpl currentWeatherDataImpl) {
+//        this.openWeatherMapConfig = openWeatherMapConfig;
+//        this.botConfig = botConfig;
+//        this.currentWeatherDataImpl = currentWeatherDataImpl;
+//    }
 
     @Override
     public void onUpdateReceived(Update update) {
