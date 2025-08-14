@@ -3,8 +3,6 @@ package ru.vorobev.openweathermapbot.service.impl;
 import org.springframework.stereotype.Service;
 import ru.vorobev.openweathermapbot.service.ConvertDirectionWind;
 
-import java.util.List;
-
 @Service
 public class ConvertDirectionWindImpl implements ConvertDirectionWind {
     public String convertDegreesToDirection(int degrees) {
