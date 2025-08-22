@@ -1,21 +1,21 @@
 package ru.vorobev.openweathermapbot.service.impl;
 
+import lombok.AllArgsConstructor;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Service;
+import ru.vorobev.openweathermapbot.util.TelegramBot;
 
 import java.util.Date;
 import java.util.TimeZone;
 
 @EnableScheduling
 @Service
+@AllArgsConstructor
 public class DynamicSchedulerService {
     private final TaskScheduler taskScheduler;
-
-    public DynamicSchedulerService(TaskScheduler taskScheduler) {
-        this.taskScheduler = taskScheduler;
-    }
+    private final TelegramBot telegramBot;
 
     public void scheduleTask(String startTime, String endTime, int intervalMinutes) {
         String cronExpression = createCronExpression(startTime, endTime, intervalMinutes);
@@ -38,6 +38,6 @@ public class DynamicSchedulerService {
     }
 
     private void executeTask() {
-        System.out.println("Динамическая задача выполняется: " + new Date());
+        telegramBot.showWeatherNow(chatId);
     }
 }

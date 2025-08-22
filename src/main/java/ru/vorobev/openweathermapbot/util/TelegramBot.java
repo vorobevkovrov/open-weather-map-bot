@@ -23,6 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 @AllArgsConstructor
 @Component
+//TODO Рефактор этого класса
 public class TelegramBot extends TelegramLongPollingBot {
     private final static String WEATHER_NOW = "/showWeatherNow";
     private final static String START = "/start";
@@ -135,7 +136,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     }
 
 
-    private void showWeatherNow(long chatId) {
+    public void showWeatherNow(long chatId) {
         String defaultWeather = currentWeatherDataImpl
                 .getWeatherInDefaultCity(59.916668, 30.25);
         sendMessage(chatId, defaultWeather);
