@@ -36,6 +36,7 @@ public class KeyboardConfig {
         List<KeyboardButton> buttons = new ArrayList<>();
         buttons.add(new KeyboardButton("Погода сейчас"));
         buttons.add(new KeyboardButton("Помощь"));
+        buttons.add(new KeyboardButton("Установить расписание"));
         //создаем и заполняем список кнопок
         return buttons;
     }
