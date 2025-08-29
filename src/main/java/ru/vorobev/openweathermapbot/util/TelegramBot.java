@@ -13,6 +13,7 @@ import ru.vorobev.openweathermapbot.configuration.BotConfig;
 import ru.vorobev.openweathermapbot.configuration.OpenWeatherMapConfig;
 import ru.vorobev.openweathermapbot.service.NotificationService;
 import ru.vorobev.openweathermapbot.service.impl.CurrentWeatherDataImpl;
+import ru.vorobev.openweathermapbot.service.impl.ShowWeather;
 
 
 import java.util.List;
@@ -34,6 +35,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     private final List<KeyboardRow> keyboardRows;
     private final NotificationService notificationService;
     private final Map<Long, UserSession> userSessions = new ConcurrentHashMap<>();
+    private final ShowWeather showWeather;
 
     private enum State {
         WAITING_START_TIME,
@@ -66,7 +68,7 @@ public class TelegramBot extends TelegramLongPollingBot {
             start(chatId, userName);
             return;
         } else if (messageText.equals(WEATHER_NOW) || messageText.equals("Погода сейчас")) {
-            showWeatherNow(chatId);
+            showWeather.showWeatherNow(chatId);
             return;
         }
 
@@ -98,8 +100,6 @@ public class TelegramBot extends TelegramLongPollingBot {
                 log.info("Processing WAITING_PERIOD");
                 if (messageText.matches("\\d+")) {
                     session.period = messageText;
-                    // Сохраняем настройки и запускаем расписание
-                    saveAndScheduleNotifications(chatId, session);
                     sendMessage(chatId, String.format(
                             "Настройки сохранены:\nНачало: %s\nКонец: %s\nПериод: %s минут",
                             session.startTime, session.endTime, session.period));
@@ -115,6 +115,8 @@ public class TelegramBot extends TelegramLongPollingBot {
                 // Обрабатываем команды, когда нет активного состояния
                 if (messageText.equals("Установить расписание")) {
                     log.info("Starting schedule setup");
+                    //TODO валидация времени необходимо установить запрет на установку времени начала
+                    // позже настоящего времени
                     sendMessage(chatId, "Введите время начала рассылки (например, 08.00):");
                     session.state = State.WAITING_START_TIME;
                 } else {
@@ -124,24 +126,18 @@ public class TelegramBot extends TelegramLongPollingBot {
         }
     }
 
-    private void saveAndScheduleNotifications(Long chatId, UserSession session) {
-        log.info("private void saveAndScheduleNotifications(Long chatId, UserSession session)");
-
-    }
-
-
     private void unknownCommand(Long chatId) {
         var text = "Не удалось распознать команду!";
         sendMessage(chatId, text);
     }
 
 
-    public void showWeatherNow(long chatId) {
-        String defaultWeather = currentWeatherDataImpl
-                .getWeatherInDefaultCity(59.916668, 30.25);
-        sendMessage(chatId, defaultWeather);
-        log.info("private void showWeatherNow chatId {}", chatId);
-    }
+//    public void showWeatherNow(long chatId) {
+//        String defaultWeather = currentWeatherDataImpl
+//                .getWeatherInDefaultCity(59.916668, 30.25);
+//        sendMessage(chatId, defaultWeather);
+//        log.info("private void showWeatherNow chatId {}", chatId);
+//    }
 
     @SneakyThrows
     public void sendMessage(long chatId, String text) {
@@ -149,7 +145,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         keyboardMarkup.setKeyboard(keyboardRows);
         sendMessage.setReplyMarkup(keyboardMarkup);
         execute(sendMessage);
-        //   log.info("public void sendMessage(long chatId, String text) {} {}", chatId, text);
+        log.info("public void sendMessage(long chatId, String text) {} {}", chatId, text);
     }
 
     private void start(long chatId, String userName) {
