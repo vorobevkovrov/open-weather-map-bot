@@ -7,24 +7,39 @@ import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import org.springframework.web.util.UriComponentsBuilder;
+import ru.vorobev.openweathermapbot.dto.WeatherDto;
+import ru.vorobev.openweathermapbot.entity.weather.TemperatureUnits;
+import ru.vorobev.openweathermapbot.configuration.OpenWeatherMapConfig;
 import ru.vorobev.openweathermapbot.entity.weather.WeatherData;
 import ru.vorobev.openweathermapbot.service.ConvertDirectionWind;
-import ru.vorobev.openweathermapbot.service.ConvertPressureHectopascalToMillimetersOfMercury;
 import ru.vorobev.openweathermapbot.service.CurrentWeatherData;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+
 @Service
-@AllArgsConstructor
 public class CurrentWeatherDataImpl implements CurrentWeatherData {
     private final static Logger LOG = LoggerFactory.getLogger(CurrentWeatherDataImpl.class);
+    private static final String URL_WEATHER = "";
+    private final OpenWeatherMapConfig weatherMapConfig;
+    //private final TemperatureUnits temperatureUnits;
     private final UrlBuilderImpl urlBuilder;
-    private WeatherData weatherData;
-    private final ConvertDirectionWind convertDirectionWind;
-    private final ConvertPressureHectopascalToMillimetersOfMercury convertToMillimetersOfMercury;
+    WeatherDto weatherDto;
+    WeatherData weatherData;
+    ConvertDirectionWind convertDirectionWind;
+
+
+    public CurrentWeatherDataImpl(OpenWeatherMapConfig weatherMapConfig, UrlBuilderImpl urlBuilder, ConvertDirectionWind convertDirectionWind) {
+        this.weatherMapConfig = weatherMapConfig;
+        this.urlBuilder = urlBuilder;
+        this.convertDirectionWind = convertDirectionWind;
+    }
 
     @SneakyThrows
     public String getWeatherInDefaultCity(double lat,
