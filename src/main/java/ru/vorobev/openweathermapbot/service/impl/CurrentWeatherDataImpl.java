@@ -27,7 +27,7 @@ public class CurrentWeatherDataImpl implements CurrentWeatherData {
     private final ConvertPressureHectopascalToMillimetersOfMercury convertToMillimetersOfMercury;
 
     @SneakyThrows
-    public String getWeatherInDefaultCity(double lat,
+    public String getWeatherInCity(double lat,
                                           double lon) {
         HttpResponse<String> response;
         ObjectMapper mapper = new ObjectMapper();
@@ -46,9 +46,9 @@ public class CurrentWeatherDataImpl implements CurrentWeatherData {
                     Сегодня в %s температура воздуха %.1f°C,
                     ощущается как %.1f°C. Скорость ветра %.1f м/с,
                     Направление ветра %s
-                    на небе %d%% облачности.                
+                    на небе %d%% облачности.               \s
                     Атмосферное давление составляет %d мм рт. ст.\
-                    """.formatted(
+                   \s""".formatted(
                     weatherData.getName(),
                     weatherData.getMain().getTemp(),
                     weatherData.getMain().getFeelsLike(),

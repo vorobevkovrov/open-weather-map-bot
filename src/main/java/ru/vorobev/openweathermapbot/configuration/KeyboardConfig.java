@@ -14,7 +14,7 @@ public class KeyboardConfig {
     @Bean
     public ReplyKeyboardMarkup replyKeyboardMarkup() {
         ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
-        //следующие три строчки могут менять значение аргументов взависимости от ваших задач
+        //следующие три строчки могут менять значение аргументов в зависимости от ваших задач
         replyKeyboardMarkup.setSelective(true);
         replyKeyboardMarkup.setResizeKeyboard(true);
         replyKeyboardMarkup.setOneTimeKeyboard(false);
